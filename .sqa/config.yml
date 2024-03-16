@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: 2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/stevenjgibbons/regressionRelLoc:
+      branch: main
+      repo: https://github.com/stevenjgibbons/regressionRelLoc
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/stevenjgibbons/regressionRelLoc git:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-periwinkle-saola.sh
+        container: qc.acc_seedy-bronze-squirrel
+  QC.Doc:
+    repos:
+      github.com/stevenjgibbons/regressionRelLoc find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-puce-bandicoot.sh
+        container: qc.doc_snappy-orange-avocet
+      github.com/stevenjgibbons/regressionRelLoc git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pasty-carmine-frise.sh
+        container: qc.doc_tacky-olivine-gerbil
+      github.com/stevenjgibbons/regressionRelLoc markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-sepia-lobster.sh
+        container: qc.doc_jumpy-olivine-urchin
+  QC.Lic:
+    repos:
+      github.com/stevenjgibbons/regressionRelLoc licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-seashell-slug.sh
+        container: qc.lic_shaky-zucchini-chameleon
+  QC.Met:
+    repos:
+      github.com/stevenjgibbons/regressionRelLoc cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-silver-alligator.sh
+        container: qc.met_wheezy-cerulean-macaw
+  QC.Ver:
+    repos:
+      github.com/stevenjgibbons/regressionRelLoc get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-vermilion-sparrow.sh
+        container: qc.ver_sleepy-cream-quetzal
+timeout: 5400
